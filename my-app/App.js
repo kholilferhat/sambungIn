@@ -1,20 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomePage from './src/views/Homepage';
+import DetailPage from './src/views/DetailPage';
+import { NavigationContainer } from "@react-navigation/native";
+
 
 export default function App() {
+  const Stack = createStackNavigator();
+
+
+
   return (
-    <View style={styles.container}>
-      <Text>hello world!!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="Detail" component={DetailPage} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
