@@ -22,22 +22,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: { msg: 'Title is required"' },
-        notEmpty: { msg: 'Title is required"' },
+        notNull: { msg: 'Title is required' },
+        notEmpty: { msg: 'Title is required' },
       }
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        notNull: { msg: 'Description is required"' },
-        notEmpty: { msg: 'Description is required"' },
+        notNull: { msg: 'Description is required' },
+        notEmpty: { msg: 'Description is required' },
       }
     },
     companyId: DataTypes.INTEGER,
     // authorId: DataTypes.INTEGER,
     jobType: DataTypes.STRING,
-    mongoAuthor: DataTypes.STRING
+    mongoAuthor: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'mongoAuthor is required' },
+        notEmpty: { msg: 'mongoAuthor is required' },
+      }
+    }
   }, {
     sequelize,
     modelName: 'Job',
