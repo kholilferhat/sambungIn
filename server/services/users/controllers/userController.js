@@ -3,7 +3,9 @@ const UserModel = require("../models/user");
 class UserController {
     static async createUSer(req, res) {
         try {
-            // const {username, email, password, role, phoneNumber, address} = req.body
+            const {email, password} = req.body
+            if(!email){return res.status(400).json({message: 'email is required'})}
+            if(!password){return res.status(400).json({message: 'password is required'})}
             const newUser = await UserModel.insertOne(req.body)
             res.status(201).json(newUser)
         } catch (error) {
@@ -28,14 +30,13 @@ class UserController {
     static async getUserById(req, res) {
         try {
             const id = req.params.id
+            // console.log(id);
             const user = await UserModel.getUser(id)
+            if(!user) {return res.status(404).json({message: 'user not found'})}
             res.json(user)
         } catch (error) {
             console.log(error);
-            if (error.name === 'NotFound') return res.status(404).json(error.message)
-            else {
-                res.status(500).json('internal server error')
-            }
+            res.status(500).json('internal server error')
         }
     }
 
