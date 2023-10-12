@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 4000
 const cors = require('cors');
 const { mongoConnect, getDB } = require('./config/config');
 const userRouter = require('./routes/userRouter')
