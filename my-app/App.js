@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './src/views/Homepage';
 import DetailPage from './src/views/DetailPage';
 import { NavigationContainer } from "@react-navigation/native";
+import TopNav from './src/components/TopNav';
 
 
 export default function App() {
@@ -12,12 +13,18 @@ export default function App() {
 
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen name="Detail" component={DetailPage} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <TopNav />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="Detail" component={DetailPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
   );
 }
 

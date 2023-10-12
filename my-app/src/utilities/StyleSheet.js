@@ -19,10 +19,10 @@ export const styles = StyleSheet.create({
     // borderWidth: 5,
     // borderRadius: 5,
     // borderColor: 'black',
-    backgroundColor: 'red'
+    backgroundColor: 'pink'
   },
   heroContainer: {
-    flex: 1 / 3,
+    // flex: 1 / 3,
     // backgroundColor: '#3579B1',
     // alignItems: 'center',
     // justifyContent: 'center',
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    height:'100%',
+    height:343,
     width:'100%',
     backgroundColor:'green'
   },
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height:'100%',
+    height:343,
     width:'100%',
     backgroundColor:'yellow'
   },
