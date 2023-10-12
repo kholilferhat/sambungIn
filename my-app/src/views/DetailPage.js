@@ -6,6 +6,7 @@ export default function DetailPage() {
   return (
     <View style={styles.container} >
       <Text>ini detail</Text>
+      
     </View>
   );
 }
