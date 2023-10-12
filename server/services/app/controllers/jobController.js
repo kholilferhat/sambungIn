@@ -11,21 +11,13 @@ class JobController {
     }
 
     static async postJob(req, res) {
-        const transaction = await sequelize.transaction()
+        // const transaction = await sequelize.transaction()
         try {
-            const { title, description, companyId, jobType, skills } = req.body
-            const job = await Job.create({ title, description, companyId, authorId: req.user.id, jobType }, { transaction })
-            const newSkill = skills.map(el => {
-                el.jobId = job.id
-                el.name
-                el.level
-                return el
-            })
-            await Skill.bulkCreate(newSkill, { transaction })
-            await transaction.commit()
-            res.status(201).json({ message: "Post job success" })
+            console.log(req.body, '<<<<');
+            // const { title, description, companyId, jobType, mongoAuthor } = req.body
+            // const job = await Job.create({ title, description, companyId, mongoAuthor, jobType })
+            // res.status(201).json({ message: "Post job success" })
         } catch (error) {
-            await transaction.rollback()
             if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') { return res.status(400).json({ message: error.errors[0].message }) }
             else { res.status(500).json({ message: "Internal Server Error" }) }
         }
