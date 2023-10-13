@@ -1,14 +1,23 @@
-import { StyleSheet, Text, View, Animated } from 'react-native'
+import { StyleSheet, Text, View, Animated, Dimensions } from 'react-native'
 import React from 'react'
+
+const{width} = Dimensions.get('screen')
 
 const Pagination = ({ data, scrollX, index }) => {
     return (
         <View style={styles.container}>
             {
                 data.map((_, idx) => {
+                    const inputRange = [(idx-1) * width, idx * width, (idx +1) * width]
+                    const dotWidth = scrollX.interpolate({
+                        inputRange,
+                        outputRange: [12, 30, 12],
+                        extrapolate: 'clamp'
+                    })
+
                    return  <Animated.View
                         key={idx.toString()}
-                        style={[styles.dot, idx === index && styles.dotActive]}
+                        style={[styles.dot, idx === index && styles.dotActive, {width: dotWidth}]}
                         
                         />
 

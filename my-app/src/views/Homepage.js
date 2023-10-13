@@ -21,6 +21,7 @@ export default function HomePage({ navigation }) {
       const response = await fetch("https://admin.spreadthejoy.id/cust/jobs");
       const data = await response.json()
       // console.log(movies);
+      // console.log(data);
       setJobs(data)
     } catch (error) {
       console.log(error);
@@ -30,6 +31,7 @@ export default function HomePage({ navigation }) {
   useEffect(() => {
     fetchJobs()
   }, [])
+
 
   // console.log('====================================');
   // console.log(jobs.Company.companyLogo, '<<<<<<');

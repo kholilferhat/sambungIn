@@ -1,3 +1,4 @@
+const { log } = require('console')
 const { Job, Skill, sequelize } = require('../models')
 
 class JobController {
@@ -38,8 +39,8 @@ class JobController {
             let id = +req.params.id
             let foundJob = await Job.findOne({ where: { id } })
             if (!foundJob) { return res.status(404).json({ message: "Job Not Found" }) }
-            const { title, description, companyId, jobType } = req.body
-            const job = await Job.update({ title, description, companyId, authorId: req.user.id, jobType }, { where: { id } })
+            const { title, description, companyId, jobType, mongoAuthor } = req.body
+            const job = await Job.update({ title, description, companyId, mongoAuthor, jobType }, { where: { id } })
             res.status(201).json({ message: "Update job success" })
         } catch (error) {
             if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') { return res.status(400).json({ message: error.errors[0].message }) }

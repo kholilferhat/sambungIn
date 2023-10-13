@@ -14,11 +14,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <TopNav />
+      {/* <TopNav /> */}
       <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}
+        // screenOptions={{
+        //   headerShown: false
+        // }}
       >
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Detail" component={DetailPage} />
