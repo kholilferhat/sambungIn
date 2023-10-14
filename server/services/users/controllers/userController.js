@@ -4,7 +4,6 @@ class UserController {
     static async createUSer(req, res) {
         try {
             const {email, password} = req.body
-            // console.log(req.body);
             if(!email){return res.status(400).json({message: 'email is required'})}
             if(!password){return res.status(400).json({message: 'password is required'})}
             const newUser = await UserModel.insertOne(req.body)
@@ -31,7 +30,6 @@ class UserController {
     static async getUserById(req, res) {
         try {
             const id = req.params.id
-            // console.log(id);
             const user = await UserModel.getUser(id)
             if(!user) {return res.status(404).json({message: 'user not found'})}
             res.json(user)

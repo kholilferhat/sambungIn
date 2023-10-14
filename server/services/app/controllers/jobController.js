@@ -12,7 +12,6 @@ class JobController {
     }
 
     static async postJob(req, res) {
-        // const transaction = await sequelize.transaction()
         try {
             const { title, description, companyId, jobType, mongoAuthor } = req.body
             const job = await Job.create({ title, description, companyId, mongoAuthor, jobType })
