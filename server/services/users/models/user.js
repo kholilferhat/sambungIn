@@ -8,7 +8,7 @@ class UserModel {
         try {
             if (!email) throw { name: 'validationError', message: 'email is required' }
             if (!password) throw { name: 'validationError', message: 'password is required' }
-
+            // console.log(email, password);
             const database = getDB()
             const hashedPass = hashPass(password)
             const users = database.collection('users')
@@ -32,6 +32,7 @@ class UserModel {
     }
     static async getUser(id) {
         try {
+            console.log(id);
             const database = getDB()
             const dbUser = database.collection('users')
             const users = await dbUser.findOne({_id: new ObjectId(id)})
@@ -40,6 +41,7 @@ class UserModel {
             throw error
         }
     }
+
 
     static async destroy(id){
         try {

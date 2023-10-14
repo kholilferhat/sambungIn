@@ -4,6 +4,7 @@ class UserController {
     static async createUSer(req, res) {
         try {
             const {email, password} = req.body
+            // console.log(req.body);
             if(!email){return res.status(400).json({message: 'email is required'})}
             if(!password){return res.status(400).json({message: 'password is required'})}
             const newUser = await UserModel.insertOne(req.body)
