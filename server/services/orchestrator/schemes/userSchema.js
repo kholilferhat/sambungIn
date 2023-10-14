@@ -72,7 +72,6 @@ export const resolvers = {
         userDetail: async (_, args) => {
             try {
                 const { _id } = args
-                // console.log(_id, '<<apollo');
                 const { data } = await axios(userUrl + 'users/' + _id)
                 return data
             } catch (error) {
@@ -83,7 +82,6 @@ export const resolvers = {
     Mutation: {
         createUser: async (_, args) => {
             try {
-                // console.log(args);
                 await axios({
                     url: userUrl + 'users',
                     method: 'POST',
@@ -91,7 +89,6 @@ export const resolvers = {
                 })
                 await redis.del('app:users')
                 return { message: 'user created' }
-                // const {data}
             } catch (error) {
                 throw error
             }
@@ -99,7 +96,6 @@ export const resolvers = {
         deleteUser: async (_, args) => {
             try {
                 const { _id } = args
-                // console.log(args);
                 await axios({
                     url: userUrl + 'users/' + _id,
                     method: 'DELETE',

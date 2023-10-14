@@ -83,7 +83,6 @@ export const resolvers = {
         jobDetail: async (_, args) => {
             try {
                 const { id } = args
-                // console.log(id, '<<apollo');
                 const { data } = await axios(baseUrl + '/jobs/' + id)
                 return data
             } catch (error) {
@@ -94,7 +93,6 @@ export const resolvers = {
     Mutation: {
         createJob: async (_, args) => {
             try {
-                // console.log(args);
                 await axios({
                     url: baseUrl + '/jobs',
                     method: 'POST',
@@ -102,7 +100,6 @@ export const resolvers = {
                 })
                 await redis.del('app:jobs')
                 return { message: 'job created' }
-                // const {data}
             } catch (error) {
                 throw error
             }
@@ -124,7 +121,6 @@ export const resolvers = {
         deleteJob: async (_, args) => {
             try {
                 const { id } = args
-                // console.log(args);
                 await axios({
                     url: baseUrl + '/jobs/' + id,
                     method: 'DELETE',
