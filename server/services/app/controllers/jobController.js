@@ -4,7 +4,7 @@ const { Job, Skill, sequelize } = require('../models')
 class JobController {
     static async getJobs(req, res) {
         try {
-            const jobs = await Job.findAll({ include: { model: Skill } })
+            const jobs = await Job.findAll({ include: { all:true } })
             res.json(jobs)
         } catch (error) {
             res.status(500).json({ message: "Internal Server Error" })
@@ -12,7 +12,6 @@ class JobController {
     }
 
     static async postJob(req, res) {
-        // const transaction = await sequelize.transaction()
         try {
             const { title, description, companyId, jobType, mongoAuthor } = req.body
             const job = await Job.create({ title, description, companyId, mongoAuthor, jobType })
@@ -26,7 +25,7 @@ class JobController {
     static async getJobById(req, res) {
         try {
             let id = +req.params.id
-            let job = await Job.findOne({ where: { id }, include: { model: Skill } })
+            let job = await Job.findOne({ where: { id }, include: { all:true } })
             if (!job) { return res.status(404).json({ message: "Job Not Found" }) }
             res.json(job)
         } catch (error) {

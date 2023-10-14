@@ -77,14 +77,15 @@ export default function HomePage({ navigation }) {
     // </View>
 
 
-    <ScrollView style={homeStyles.mainContainer}>
-      <View style={homeStyles.heroContainer}>
-        <Slider />
-      </View>
+    <View style={homeStyles.mainContainer}>
+     
       <View style={homeStyles.jobContainer}>
         {/* <FlatList /> */}
         <FlatList
           data={jobs}
+          ListHeaderComponent={ <View style={homeStyles.heroContainer}>
+          <Slider />
+        </View>}
           renderItem={({ item }) =>
             <JobCard job={item} />
             // <BannerCard item={item}
@@ -92,7 +93,7 @@ export default function HomePage({ navigation }) {
           } />
 
       </View>
-    </ScrollView>
+    </View>
 
 
 
