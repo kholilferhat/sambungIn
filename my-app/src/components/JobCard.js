@@ -1,18 +1,23 @@
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { MotiView } from 'moti'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, index }) => {
 
     // console.log('====================================');
     // console.log(job.Company.companyLogo, '<<<');
     // console.log('====================================');
 
     return (
-        <View style={styles.container}>
+        <MotiView style={styles.container}
+            from={{ opacity: 0, translateY: 50 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: index * 200 }}
+        >
             <View style={styles.imgContainer}>
                 <Image
                     source={{ uri: `${job.Company.companyLogo}` }}
@@ -23,10 +28,10 @@ const JobCard = ({ job }) => {
             <View style={styles.contentContainer}>
                 <Text style={styles.title}>{job.title}</Text>
                 <Text style={styles.description}>{job.Company.name}</Text>
-                <Text style={styles.description}>{job.User.username}</Text>
+                <Text style={styles.description}>{job.Company.email}</Text>
                 <Text>{job.jobType}</Text>
             </View>
-        </View>
+        </MotiView>
     )
 }
 

@@ -152,6 +152,7 @@ const promoStyles = StyleSheet.create({
 
         // height: 252
         // height: windowHeight * 0.4
+        
     },
     content: {
         // width: windowWidth * 0.5,
@@ -159,8 +160,9 @@ const promoStyles = StyleSheet.create({
         margin: 16,
         borderWidth: 1,
         borderColor: '#EAEAEA',
-        height: windowHeight * 0.3,
+        // height: windowHeight * 0.3,
         borderRadius: 8,
+        
     },
     image: {
         // height: 147
@@ -176,7 +178,7 @@ const promoStyles = StyleSheet.create({
     text: {
         margin: 8,
         // lineHeight: ,
-        fontSize: 18,
+        fontSize: 14,
         color: '#333'
     },
 

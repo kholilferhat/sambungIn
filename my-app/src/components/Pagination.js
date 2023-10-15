@@ -11,7 +11,7 @@ const Pagination = ({ data, scrollX, index }) => {
                     const inputRange = [(idx-1) * width, idx * width, (idx +1) * width]
                     const dotWidth = scrollX.interpolate({
                         inputRange,
-                        outputRange: [12, 30, 12],
+                        outputRange: [8, 24, 8],
                         extrapolate: 'clamp'
                     })
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#ccc',
         borderWidth:1,
         borderColor: '#666',
-        marginHorizontal:3
+        marginHorizontal:2
 
     },
     dotActive: {
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width:'100%',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        marginBottom: 4,
+        marginTop:4
         // zIndex: 3
     }
 })

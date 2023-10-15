@@ -65,7 +65,7 @@ const Slider = () => {
                 snapToAlignment="center"
                 pagingEnabled={true}
                 showsHorizontalScrollIndicator={false}
-                style={{ flex: 1 }}
+                style={{ flex: 1,  }}
                 onScroll={handleOnScroll}
                 onViewableItemsChanged={handleOnViewableItems}
             />
