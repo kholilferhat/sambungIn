@@ -1,40 +1,35 @@
-import { Button, ScrollView, Text, View, Dimensions, ActivityIndicator, TouchableWithoutFeedback, TouchableOpacity, SafeAreaView } from "react-native";
-import { styles } from "../utilities/StyleSheet";
+import { Text, View, Dimensions, ActivityIndicator, SafeAreaView } from "react-native";
 import JobCard from "../components/JobCard";
-import BannerCard from "../components/BannerCard";
 import { StyleSheet } from "react-native";
-// import { SafeAreaView } from "react-native-safe-area-context";
 import Slider from "../components/Slider";
-import { FlatList } from "react-native-gesture-handler";
-import { useCallback, useEffect, useRef, useState } from "react";
-import TopNav from "../components/TopNav";
-import { gql, useQuery } from '@apollo/client';
+import { FlatList, RefreshControl, TouchableHighlight } from "react-native-gesture-handler";
+import { useCallback, useState } from "react";
+import { useQuery } from '@apollo/client';
 import { GET_JOBS } from "../query";
 import DetailPage from "./DetailPage";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"
 
 
-const { width, height } = Dimensions.get('screen')
+const { height } = Dimensions.get('screen')
 
 
 
-export default function HomePage({ navigation }) {
+export default function HomePage() {
 
-  // const [jobs, setJobs] = useState([])
-
-  const SheetRef = useRef < BottomSheet > (null)
-  const [isOpen, setIsOpen] = useState(true)
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const snapPoints = [1, "60", "90"]
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
-  // const insets = useSafeAreaInsets();
-
+  const snapPoints = [1, "55", "90"]
 
   const { data, loading, error } = useQuery(GET_JOBS)
-  // console.log(data, loading, error);
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -53,32 +48,11 @@ export default function HomePage({ navigation }) {
 
   const jobs = data.jobs
 
-  // async function fetchJobs() {
-  //   try {
-  //     const response = await fetch("https://admin.spreadthejoy.id/cust/jobs");
-  //     const data = await response.json()
-  //     // console.log(movies);
-  //     // console.log(data);
-  //     setJobs(data)
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchJobs()
-  // }, [])
-
-
-
   return (
 
     <SafeAreaView style={homeStyles.mainContainer}>
       <View style={homeStyles.greyBackground} />
-
-
       <View style={homeStyles.jobContainer}>
-        {/* <TouchableOpacity */}
         <FlatList
           data={jobs}
           keyExtractor={item => item.id}
@@ -88,60 +62,33 @@ export default function HomePage({ navigation }) {
             </View>
           }
           renderItem={({ item, index }) =>
-            <TouchableOpacity
+            <TouchableHighlight
               onPress={() => {
-                // navigation.navigate('Detail')
-                // console.log('pressed');
-                // <DetailPage/>
-                // navigation.navigate('Detail', { jobId: item.id });
-                // console.log(item, '<<onpress');
                 setSelectedJobId(item.id)
                 setIsBottomSheetVisible(true);
               }}
             >
               <JobCard job={item} index={index} />
-            </TouchableOpacity>
+            </TouchableHighlight>
 
           }
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
-        {/* </TouchableWithoutFeedback> */}
       </View>
 
-      {/* ----batas---- */}
-      {/* <View style={homeStyles.greyBackground}/> */}
-      {/* <DetailPage /> */}
-      {/* </View> */}
-
-      {/* <BottomSheet
-        // ref={SheetRef}
-        snapPoints={snapPoints}
-      >
-        <BottomSheetView>
-          <DetailPage />
-        </BottomSheetView>
-      </BottomSheet> */}
-
-      
-
       <BottomSheet
-        index={isBottomSheetVisible ? 1 : 0} 
+        index={isBottomSheetVisible ? 1 : 0}
         snapPoints={snapPoints}
-        // enablePanDownToClose={true}
         handleIndicatorStyle={{ display: 'none' }}
         onChange={(index) => {
-          // Close the bottom sheet when it's fully closed
-          console.log(index);
           if (index === 0) {
             setIsBottomSheetVisible(false);
           }
         }}
-        
+
         style={isBottomSheetVisible ? homeStyles.shadow : ''}
-      // backdropComponent={(backdropProps) => (
-      //   <BottomSheetBackdrop {...backdropProps} enableTouchThrough={true} />
-      // )}
-      // backdropComponent={}
-      // backdropComponent={BottomSheetBackdrop}
       >
         <BottomSheetView>
           <DetailPage jobId={selectedJobId} />
@@ -156,30 +103,20 @@ export default function HomePage({ navigation }) {
   );
 }
 
-// onPress={() => { navigation.navigate('Detail') }}
-// title="Detail"
-
 const homeStyles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "white",
     height,
-
-
   },
   heroContainer: {
-    // flex: 1/4,
     alignItems: 'center',
     justifyContent: 'center',
     height: 260,
     marginBottom: 8,
-    // height,
-    // flex: 0.4,
     backgroundColor: 'white'
   },
   jobContainer: {
-    // flex:
-    // marginTop: 8,
     backgroundColor: '#E8E5DF'
 
   },
@@ -199,15 +136,6 @@ const homeStyles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 4.22,
-
     elevation: 3,
   }
-  // greyBackground: {
-  //   position: 'absolute',
-  //   // flex:1,
-  //   backgroundColor: 'grey',
-  //   // opacity: 0.5,
-  //   zIndex: 2,
-  //   height,
-  // }
 })

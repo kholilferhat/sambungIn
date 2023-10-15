@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Animated, Dimensions } from 'react-native'
+import { StyleSheet, View, Animated, Dimensions } from 'react-native'
 import React from 'react'
 
 const{width} = Dimensions.get('screen')
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 8,
-        // backgroundColor: '#ccc',
         borderWidth:1,
         borderColor: '#666',
         marginHorizontal:2
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#666'
     }
     ,container: {
-        // position: 'absolute',
         bottom: 10,
         flexDirection: 'row',
         width:'100%',
@@ -52,6 +50,5 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginBottom: 4,
         marginTop:4
-        // zIndex: 3
     }
 })

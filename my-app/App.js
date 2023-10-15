@@ -1,11 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './src/views/Homepage';
 import DetailPage from './src/views/DetailPage';
 import { NavigationContainer } from "@react-navigation/native";
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const client = new ApolloClient({
@@ -21,7 +19,6 @@ export default function App() {
     <ApolloProvider client={client}>
       <SafeAreaProvider>
         <NavigationContainer>
-          {/* <TopNav /> */}
           <Stack.Navigator
           screenOptions={{
             headerShown: false
@@ -32,9 +29,6 @@ export default function App() {
             <Stack.Screen
               name="Detail"
               component={DetailPage}
-              // options={
-              //  { vertical}
-              // }
           />
           </Stack.Navigator>
         </NavigationContainer>

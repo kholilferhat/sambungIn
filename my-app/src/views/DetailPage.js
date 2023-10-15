@@ -1,35 +1,12 @@
-import { Button, StyleSheet, Text, View, Dimensions, Image, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
-import { styles } from "../utilities/StyleSheet";
+import { StyleSheet, Text, View, Dimensions, Image, ActivityIndicator } from "react-native";
 import { useQuery } from "@apollo/client";
 import { GET_JOB_BY_ID } from "../query";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function DetailPage({ jobId }) {
-  // console.log(jobId);
-
-  // const { data, loading, error } = useQuery(GET_JOBS)
-  // // console.log(data, loading, error);
-  // if (loading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //       <ActivityIndicator />
-  //     </View>
-  //   )
-  // }
-
-  // if (error) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //       <Text> Error...</Text>
-  //     </View>
-  //   )
-  // }
-
-  // const jobs = data.jobs
 
   const { data, loading, error } = useQuery(GET_JOB_BY_ID, {
     variables: {
@@ -55,15 +32,8 @@ export default function DetailPage({ jobId }) {
 
   const job = data.jobDetail
 
-  console.log(job, '<<detail');
-
-
-
-
   return (
-
     < View style={detailStyles.container}>
-
       <View style={detailStyles.lineContainer}>
         <View style={detailStyles.line} />
       </View>
@@ -89,14 +59,13 @@ export default function DetailPage({ jobId }) {
           <Text style={detailStyles.h3}>{job.jobType}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
-          {/* <Ionicons name="md-list-sharp" size={24} color="black" /> */}
           <Text style={[detailStyles.h3, { fontWeight: 'bold' }]}>Skills:</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
           {job.Skills &&
-            job.Skills.map(el => {
+            job.Skills.map((el, index) => {
               return (
-                <View>
+                <View key={index}>
                   <View style={{ flexWrap: "wrap", margin: 2 }}>
                     <Text style={detailStyles.skilltext}>{el.name}</Text>
                   </View>
@@ -105,7 +74,6 @@ export default function DetailPage({ jobId }) {
                   </View>
                 </View>
               )
-              // console.log(el, '<<jobskills');
             })
           }
         </View>
@@ -117,13 +85,8 @@ export default function DetailPage({ jobId }) {
 
 const detailStyles = StyleSheet.create({
   container: {
-    // position: 'absolute',
-    // flex: 1,
-    // flex:0.5,
     height: windowHeight,
     backgroundColor: 'white',
-    // opacity: 0.5,
-
   },
   bottomSheetContainer: {
     position: 'absolute',
@@ -134,7 +97,6 @@ const detailStyles = StyleSheet.create({
     top: 50,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    // opacity: 1
   },
   lineContainer: {
     height: 46,
@@ -150,8 +112,6 @@ const detailStyles = StyleSheet.create({
     marginVertical: 17,
   },
   greyBackground: {
-    // position: 'absolute',
-    // flex:1,
     backgroundColor: 'grey',
     opacity: 0.5,
     zIndex: 0,
@@ -166,7 +126,6 @@ const detailStyles = StyleSheet.create({
     fontWeight: 'bold'
   },
   image: {
-    // borderRadius: 999,
     width: 52,
     height: 52,
     backgroundColor: 'white'

@@ -24,17 +24,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         flex: 0.1,
-        // paddingTop: 12,
-        // paddingBottom: 12,
-        // height: 95,
-        // flexDirection: 'row',
         backgroundColor: 'white',
         borderBottomWidth: 2,
         borderColor: '#eaeaea'
 
     },
-    // image: {
-    //     width: 14,
-    //     height: 14
-    // }
 })

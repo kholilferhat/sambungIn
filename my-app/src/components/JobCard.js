@@ -8,9 +8,6 @@ const windowHeight = Dimensions.get('window').height;
 
 const JobCard = ({ job, index }) => {
 
-    // console.log('====================================');
-    // console.log(job.Company.companyLogo, '<<<');
-    // console.log('====================================');
 
     return (
         <MotiView style={styles.container}
@@ -67,7 +64,6 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 14,
-        // fontWeight: 'bold'
     },
 })
 
