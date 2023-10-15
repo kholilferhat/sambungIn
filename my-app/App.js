@@ -1,30 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './src/views/Homepage';
 import DetailPage from './src/views/DetailPage';
 import { NavigationContainer } from "@react-navigation/native";
-import TopNav from './src/components/TopNav';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
+const client = new ApolloClient({
+  uri: 'https://7b5f-123-253-232-191.ngrok-free.app/',
+  cache: new InMemoryCache(),
+});
 
 export default function App() {
   const Stack = createStackNavigator();
 
 
-
   return (
-    <NavigationContainer>
-      {/* <TopNav /> */}
-      <Stack.Navigator
-        // screenOptions={{
-        //   headerShown: false
-        // }}
-      >
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Detail" component={DetailPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+          >
 
+            <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen
+              name="Detail"
+              component={DetailPage}
+          />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ApolloProvider>
   );
 }
 

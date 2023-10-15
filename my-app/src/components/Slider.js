@@ -2,7 +2,6 @@ import { ScrollView, StyleSheet, Text, View, FlatList, Animated } from 'react-na
 import React, { useRef, useState } from 'react'
 import BannerCard from "../components/BannerCard";
 import Pagination from './Pagination';
-// import { FlatList } from 'react-native-gesture-handler';
 
 const data = [
     {
@@ -28,7 +27,6 @@ const Slider = () => {
     const scrollX = useRef(new Animated.Value(0)).current
 
     const handleOnViewableItems = useRef(({ viewableItems }) => {
-        // console.log(viewableItems, '<<<viewableItems');
         setIndex(viewableItems[0].index)
     }).current
 
@@ -52,9 +50,6 @@ const Slider = () => {
 
     return (
         <View >
-            {/* <ScrollView
-      horizontal={true}
-      > */}
             <FlatList
                 data={data}
                 renderItem={({ item }) =>
@@ -65,12 +60,10 @@ const Slider = () => {
                 snapToAlignment="center"
                 pagingEnabled={true}
                 showsHorizontalScrollIndicator={false}
-                style={{ flex: 1 }}
+                style={{ flex: 1,  }}
                 onScroll={handleOnScroll}
                 onViewableItemsChanged={handleOnViewableItems}
             />
-            {/* <BannerCard /> */}
-            {/* </ScrollView> */}
             <Pagination data={data} scrollX={scrollX} index={index} />
         </View>
     )

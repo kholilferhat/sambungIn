@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Animated, Dimensions } from 'react-native'
+import { StyleSheet, View, Animated, Dimensions } from 'react-native'
 import React from 'react'
 
 const{width} = Dimensions.get('screen')
@@ -11,7 +11,7 @@ const Pagination = ({ data, scrollX, index }) => {
                     const inputRange = [(idx-1) * width, idx * width, (idx +1) * width]
                     const dotWidth = scrollX.interpolate({
                         inputRange,
-                        outputRange: [12, 30, 12],
+                        outputRange: [8, 24, 8],
                         extrapolate: 'clamp'
                     })
 
@@ -34,22 +34,21 @@ const styles = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 8,
-        // backgroundColor: '#ccc',
         borderWidth:1,
         borderColor: '#666',
-        marginHorizontal:3
+        marginHorizontal:2
 
     },
     dotActive: {
         backgroundColor: '#666'
     }
     ,container: {
-        // position: 'absolute',
         bottom: 10,
         flexDirection: 'row',
         width:'100%',
         alignItems:'center',
-        justifyContent:'center'
-        // zIndex: 3
+        justifyContent:'center',
+        marginBottom: 4,
+        marginTop:4
     }
 })
