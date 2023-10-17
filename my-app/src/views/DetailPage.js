@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Dimensions, Image, ActivityIndicator } from "react-native";
 import { useQuery } from "@apollo/client";
-import { GET_JOB_BY_ID } from "../query";
+import { GET_JOB_BY_ID, GET_USER_BY_ID } from "../query";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -8,13 +8,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 export default function DetailPage({ jobId }) {
 
-  const { data, loading, error } = useQuery(GET_JOB_BY_ID, {
+  const { data:jobData, loading: jobLoading, error:jobError } = useQuery(GET_JOB_BY_ID, {
     variables: {
       jobDetailId: jobId
     }
   })
 
-  if (loading) {
+  const { data: userData, loading: userLoading, error: userError } = useQuery(GET_USER_BY_ID, {
+    variables: {
+      id: jobData?.jobDetail?.mongoAuthor
+    },
+  });
+
+  if (jobLoading || userLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator />
@@ -22,7 +28,7 @@ export default function DetailPage({ jobId }) {
     )
   }
 
-  if (error) {
+  if (jobError || userError) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text> Error...</Text>
@@ -30,7 +36,8 @@ export default function DetailPage({ jobId }) {
     )
   }
 
-  const job = data.jobDetail
+  const job = jobData.jobDetail
+  const user = userData.userDetail
 
   return (
     < View style={detailStyles.container}>
@@ -76,6 +83,17 @@ export default function DetailPage({ jobId }) {
               )
             })
           }
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
+          <Text style={[detailStyles.h3, { fontWeight: 'bold' }]}>Created By:</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
+          <MaterialIcons name="verified-user" size={24} color="black" />
+          <Text style={detailStyles.h3}>{user?.username}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: "center", gap: 8 }}>
+          <MaterialIcons name="email" size={24} color="black" />
+          <Text style={detailStyles.h3}>{user?.email}</Text>
         </View>
       </View>
     </ View>

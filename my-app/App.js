@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const client = new ApolloClient({
-  uri: 'https://7b5f-123-253-232-191.ngrok-free.app/',
+  uri: 'https://admin.spreadthejoy.id/',
   cache: new InMemoryCache(),
 });
 

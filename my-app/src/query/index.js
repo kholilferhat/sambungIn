@@ -23,18 +23,30 @@ export const GET_JOBS = gql`
 export const GET_JOB_BY_ID = gql`
   query JobDetail($jobDetailId: ID!) {
   jobDetail(id: $jobDetailId) {
-    Company {
-      companyLogo
-      email
-      name
-    }
     title
+    mongoAuthor
     jobType
+    id
     description
+    companyId
     Skills {
       level
       name
     }
+    Company {
+      name
+      email
+      companyLogo
+    }
   }
 }
+`
+
+export const GET_USER_BY_ID = gql`
+  query UserDetail($id: String!) {
+    userDetail(_id: $id) {
+      email
+      username
+    }
+  }
 `
