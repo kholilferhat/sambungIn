@@ -1,6 +1,12 @@
 const axios = require('axios')
 const Redis = require('ioredis');
-const redis = new Redis()
+const redis = new Redis({
+    port: 6379, // Redis port
+    host: "127.0.0.1", // Redis host
+    username: "default", // needs Redis >= 6
+    password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
+    db: 0, // Defaults to 0
+  })
 
 const pgUrl = 'http://localhost:4001/'
 const mongoUrl = 'http://localhost:4000/'

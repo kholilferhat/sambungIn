@@ -1,8 +1,14 @@
 import axios from 'axios'
 import Redis from 'ioredis'
-const redis = new Redis()
+const redis = new Redis({
+    port: 16837, // Redis port
+    host: "redis-16837.c299.asia-northeast1-1.gce.cloud.redislabs.com", // Redis host
+    username: "default", // needs Redis >= 6
+    password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
+  })
 
-const userUrl = 'http://localhost:4002/'
+// const userUrl = 'http://localhost:4002/'
+const userUrl = 'http://service-user:8002/'
 
 export const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.

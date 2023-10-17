@@ -1,7 +1,14 @@
 import axios from "axios";
 import Redis from 'ioredis'
-const redis = new Redis()
-const baseUrl = 'http://localhost:4001'
+const redis = new Redis({
+    port: 16837, // Redis port
+    host: "redis-16837.c299.asia-northeast1-1.gce.cloud.redislabs.com", // Redis host
+    username: "default", // needs Redis >= 6
+    password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
+  })
+// const baseUrl = 'http://localhost:4001'
+const baseUrl = 'http://service-app:8001'
+
 
 export const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
@@ -72,10 +79,12 @@ export const resolvers = {
             try {
                 const checkJobs = await redis.get('app:jobs')
                 if (checkJobs) {
+                    // console.log('dari redis');
                     return JSON.parse(checkJobs)
                 }
                 const { data } = await axios(baseUrl + '/jobs')
-                redis.set('app:jobs', JSON.stringify(data))
+                await redis.set('app:jobs', JSON.stringify(data))
+                // console.log('bukan dari redis');
                 return data
             } catch (error) {
                 throw error
