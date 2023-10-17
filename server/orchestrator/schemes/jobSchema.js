@@ -6,7 +6,8 @@ const redis = new Redis({
     username: "default", // needs Redis >= 6
     password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
   })
-const baseUrl = 'http://localhost:4001'
+const baseUrl = 'http://service-app:4001'
+// const baseUrl = 'http://localhost:4001'
 // const baseUrl = 'http://service-app:8001'
 
 

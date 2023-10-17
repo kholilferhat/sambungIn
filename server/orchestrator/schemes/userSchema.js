@@ -7,7 +7,8 @@ const redis = new Redis({
     password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
   })
 
-const userUrl = 'http://localhost:4002/'
+const userUrl = 'http://service-user:4002/'
+// const userUrl = 'http://localhost:4002/'
 // const userUrl = 'http://service-user:8002/'
 
 export const typeDefs = `#graphql
