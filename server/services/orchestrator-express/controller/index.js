@@ -4,7 +4,7 @@ const redis = new Redis({
     port: 6379, // Redis port
     host: "127.0.0.1", // Redis host
     username: "default", // needs Redis >= 6
-    password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
+    password: process.env.REDIS_PASSWORD,
     db: 0, // Defaults to 0
   })
 

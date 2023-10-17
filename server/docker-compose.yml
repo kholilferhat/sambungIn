@@ -3,13 +3,13 @@ services:
     build: "./orchestrator"
     ports:
       - "80:4000"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     
   service-user:
     build: "./services/users"
     ports:
       - "8002:4002"
-    # environment:
-    #   - MONGO_CONNECT=${MONGO_CONNECT}
     environment:
        MONGO_CONNECT: ${MONGO_CONNECT}
 
