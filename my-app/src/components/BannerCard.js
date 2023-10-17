@@ -45,8 +45,8 @@ const promoStyles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        borderTopStartRadius: 7,
-        borderTopEndRadius: 7,
+        borderTopLeftRadius: 7,
+        borderTopRightRadius: 7,
     },
     text: {
         margin: 8,

@@ -127,7 +127,7 @@ const detailStyles = StyleSheet.create({
     backgroundColor: 'grey',
     borderRadius: 8,
     alignSelf: 'center',
-    marginVertical: 17,
+    marginVertical: 12,
   },
   greyBackground: {
     backgroundColor: 'grey',
