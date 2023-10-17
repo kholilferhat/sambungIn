@@ -7,8 +7,8 @@ const redis = new Redis({
     password: "ktZDmEO7qOv8ncb32RTSiKlHB3yAg8Xm",
   })
 
-// const userUrl = 'http://localhost:4002/'
-const userUrl = 'http://service-user:8002/'
+const userUrl = 'http://localhost:4002/'
+// const userUrl = 'http://service-user:8002/'
 
 export const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
