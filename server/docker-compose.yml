@@ -2,14 +2,16 @@ services:
   orcherstrator:
     build: "./orchestrator"
     ports:
-      - "8000:4000"
+      - "80:4000"
     
   service-user:
     build: "./services/users"
     ports:
       - "8002:4002"
+    # environment:
+    #   - MONGO_CONNECT=${MONGO_CONNECT}
     environment:
-      - MONGO_CONNECT=mongodb+srv://kholilferhat:Inmemoriam1@individual-project.cfkptk4.mongodb.net/
+       MONGO_CONNECT: ${MONGO_CONNECT}
 
 
   service-app:
@@ -17,6 +19,5 @@ services:
     ports:
       - "8001:4001"
     environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgres://joyfiomy:6_Q7vjUekr19Gf15aKUsD_TKcp9HkL5B@rosie.db.elephantsql.com/joyfiomy
-      
+      NODE_ENV : ${NODE_ENV}
+      DATABASE_URL : ${DATABASE_URL}
