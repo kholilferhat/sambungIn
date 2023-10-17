@@ -10,7 +10,7 @@ const routerCust = require('./routeCust')
 
 
 router.get('/', (req, res) => {
-    res.send(`hello 👋🏻`)
+    res.send(`hello matee 👋🏻`)
 })
 
 

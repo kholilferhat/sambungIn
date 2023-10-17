@@ -1,0 +1,25 @@
+services:
+  orcherstrator:
+    build: "./orcherstrator"
+    ports:
+      -"8000:4000"
+    
+  service-user:
+    build: "./services/user"
+    ports:
+      -"8001:4001"
+    environment:
+      - MONGO_CONNECT=mongodb+srv://kholilferhat:Inmemoriam1@individual-project.cfkptk4.mongodb.net/
+
+
+  service-app:
+    build: "./services/app"
+    ports:
+      -"8002:4002"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://joyfiomy:6_Q7vjUekr19Gf15aKUsD_TKcp9HkL5B@rosie.db.elephantsql.com/joyfiomy
+
+  redis:
+    image: redis:latest
+      

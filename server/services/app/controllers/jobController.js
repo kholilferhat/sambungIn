@@ -7,6 +7,7 @@ class JobController {
             const jobs = await Job.findAll({ include: { all:true } })
             res.json(jobs)
         } catch (error) {
+            console.log(error, '<<<controller');
             res.status(500).json({ message: "Internal Server Error" })
         }
     }
